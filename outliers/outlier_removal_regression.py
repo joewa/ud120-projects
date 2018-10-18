@@ -9,8 +9,8 @@ from outlier_cleaner import outlierCleaner
 
 
 ### load up some practice data with outliers in it
-ages = pickle.load( open("practice_outliers_ages.pkl", "r") )
-net_worths = pickle.load( open("practice_outliers_net_worths.pkl", "r") )
+ages = pickle.load( open("practice_outliers_ages.pkl", "rb") )
+net_worths = pickle.load( open("practice_outliers_net_worths.pkl", "rb") )
 
 
 
@@ -25,12 +25,16 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 
 ### fill in a regression here!  Name the regression object reg so that
 ### the plotting code below works, and you can see what your regression looks like
+from sklearn.linear_model import LinearRegression
 
-
-
-
-
-
+reg = LinearRegression(copy_X=True,fit_intercept=True,normalize=False)
+reg.fit(ages_train, net_worths_train)
+print("########### LinearRegression's coefficients ###########")
+print("slope = {slope}; intercept = {intercept}".format(slope=reg.coef_, intercept=reg.intercept_))
+print("########### stats on test dataset ###########")
+print("r-squared score:{0}".format(reg.score(ages_test, net_worths_test)))
+print("########### stats on training dataset ###########")
+print("r-squared score:{0}".format(reg.score(ages_train, net_worths_train)))
 
 
 
@@ -48,11 +52,12 @@ plt.show()
 cleaned_data = []
 try:
     predictions = reg.predict(ages_train)
-    cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
+    # cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
 except NameError:
-    print "your regression object doesn't exist, or isn't name reg"
-    print "can't make predictions to use in identifying outliers"
+    print("your regression object doesn't exist, or isn't name reg")
+    print("can't make predictions to use in identifying outliers")
 
+cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
 
 
 
@@ -69,10 +74,16 @@ if len(cleaned_data) > 0:
     try:
         reg.fit(ages, net_worths)
         plt.plot(ages, reg.predict(ages), color="blue")
+        print("########### Removed Outliers LinearRegression's coefficients ###########")
+        print("slope = {slope}; intercept = {intercept}".format(slope=reg.coef_, intercept=reg.intercept_))
+        print("########### stats on test dataset ###########")
+        print("r-squared score:{0}".format(reg.score(ages_test, net_worths_test)))
+        print("########### stats on training dataset ###########")
+        print("r-squared score:{0}".format(reg.score(ages_train, net_worths_train)))
     except NameError:
-        print "you don't seem to have regression imported/created,"
-        print "   or else your regression object isn't named reg"
-        print "   either way, only draw the scatter plot of the cleaned data"
+        print("you don't seem to have regression imported/created,")
+        print("   or else your regression object isn't named reg")
+        print("   either way, only draw the scatter plot of the cleaned data")
     plt.scatter(ages, net_worths)
     plt.xlabel("ages")
     plt.ylabel("net worths")
@@ -80,5 +91,4 @@ if len(cleaned_data) > 0:
 
 
 else:
-    print "outlierCleaner() is returning an empty list, no refitting to be done"
-
+    print("outlierCleaner() is returning an empty list, no refitting to be done")
