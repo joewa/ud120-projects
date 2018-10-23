@@ -16,6 +16,7 @@ from collections import Counter
 
 
 sys.path.append("../tools/")
+sys.path.append("../choose_your_own/")
 
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
