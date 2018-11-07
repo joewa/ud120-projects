@@ -8,10 +8,10 @@ numpy.random.seed(42)
 ### The words (features) and authors (labels), already largely processed.
 ### These files should have been created from the previous (Lesson 10)
 ### mini-project.
-words_file = "../text_learning/your_word_data.pkl" 
+words_file = "../text_learning/your_word_data.pkl"
 authors_file = "../text_learning/your_email_authors.pkl"
-word_data = pickle.load( open(words_file, "r"))
-authors = pickle.load( open(authors_file, "r") )
+word_data = pickle.load( open(words_file, "rb"))
+authors = pickle.load( open(authors_file, "rb") )
 
 
 
@@ -38,6 +38,25 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+print("25. Quiz: {}".format(features_train.shape))
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
 
 
+print("26. Quiz: ########### stats on test dataset ###########")
+print("r-squared score:{0}".format(clf.score(features_test, labels_test)))
 
+top_features = [(number, feature, vectorizer.get_feature_names()[number]) \
+                for number, feature in zip(range(len(clf.feature_importances_)), clf.feature_importances_) \
+                if feature > 0.2]
+max_importance = clf.feature_importances_.max()
+max_pos = clf.feature_importances_.argmax()
+max_name = vectorizer.get_feature_names()[max_pos]
+print("27. Quiz: Importance {0}; Number {1}; Name {2}".format(max_importance, max_pos, max_name))
+
+print("27. Quiz {}".format(top_features))
+
+
+print("########### stats on training dataset ###########")
+print("r-squared score:{0}".format(clf.score(features_train, labels_train)))

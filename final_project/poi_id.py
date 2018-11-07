@@ -8,11 +8,29 @@ import pandas as pd
 from copy import deepcopy
 import matplotlib.pyplot as plt
 
-from sklearn.model_selection  import train_test_split
-from sklearn.metrics          import accuracy_score, confusion_matrix, precision_score, recall_score, classification_report
-from sklearn.tree             import DecisionTreeClassifier
+
+from sklearn.decomposition     import PCA
+from sklearn.feature_selection import SelectPercentile, SelectKBest, SelectFromModel
+from sklearn.model_selection   import train_test_split, GridSearchCV, StratifiedShuffleSplit
+from sklearn.metrics           import accuracy_score, confusion_matrix, precision_score, recall_score, classification_report
+from sklearn.tree              import DecisionTreeClassifier
+from sklearn.neighbors         import KNeighborsClassifier
+from sklearn.svm               import LinearSVC
+from sklearn.ensemble          import VotingClassifier, AdaBoostClassifier, RandomForestClassifier
+from sklearn.pipeline          import Pipeline, FeatureUnion
+
 
 from collections import Counter
+
+# DataFrameSelector from: "Hands on machine learning with Scikit-Learn & Tensorflow"
+from sklearn.base import BaseEstimator, TransformerMixin
+class DataFrameSelector(BaseEstimator, TransformerMixin):
+    def __init__(self, attribute_names=['total_payments', 'total_stock_value']):
+        self.attribute_names = attribute_names
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X):
+        return X[self.attribute_names].values
 
 
 sys.path.append("../tools/")
