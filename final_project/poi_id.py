@@ -8,14 +8,15 @@ import pandas as pd
 from copy import deepcopy
 import matplotlib.pyplot as plt
 
-
-from sklearn.decomposition     import PCA
-from sklearn.feature_selection import SelectPercentile, SelectKBest, SelectFromModel
-from sklearn.model_selection   import train_test_split, GridSearchCV, StratifiedShuffleSplit
+from sklearn.preprocessing     import MaxAbsScaler, MinMaxScaler, StandardScaler, RobustScaler
+from sklearn.decomposition     import PCA, KernelPCA
+from sklearn.feature_selection import SelectPercentile, SelectKBest, SelectFromModel, RFECV, RFE
+from sklearn.model_selection   import train_test_split, StratifiedShuffleSplit, GridSearchCV, ParameterGrid
 from sklearn.metrics           import accuracy_score, confusion_matrix, precision_score, recall_score, classification_report
 from sklearn.tree              import DecisionTreeClassifier
-from sklearn.neighbors         import KNeighborsClassifier
-from sklearn.svm               import LinearSVC
+from sklearn.neighbors         import KNeighborsClassifier, NearestCentroid
+from sklearn.svm               import LinearSVC, SVC
+from sklearn.linear_model      import LogisticRegression
 from sklearn.ensemble          import VotingClassifier, AdaBoostClassifier, RandomForestClassifier
 from sklearn.pipeline          import Pipeline, FeatureUnion
 
