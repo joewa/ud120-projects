@@ -102,7 +102,7 @@ def main():
     ### load up student's classifier, dataset, and feature_list
     clf, dataset, feature_list = load_classifier_and_data()
     ### Run testing script
-    test_classifier(clf, dataset, feature_list)
+    test_classifier(clf, dataset, ["poi"] + feature_list)
 
 if __name__ == '__main__':
     main()
