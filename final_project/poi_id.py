@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.preprocessing     import MaxAbsScaler, MinMaxScaler, StandardScaler, RobustScaler, FunctionTransformer
 from sklearn.decomposition     import PCA, KernelPCA
-from sklearn.feature_selection import SelectPercentile, SelectKBest, chi2, SelectFromModel, RFECV, RFE
+from sklearn.feature_selection import SelectPercentile, SelectKBest, chi2, f_classif, SelectFromModel, RFECV, RFE
 from sklearn.model_selection   import train_test_split, StratifiedShuffleSplit, GridSearchCV, ParameterGrid
 from sklearn.metrics           import accuracy_score, confusion_matrix, precision_score, recall_score, classification_report
 from sklearn.tree              import DecisionTreeClassifier
