@@ -15756,7 +15756,7 @@ precision and recall.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Selecting-the-Best-Classifier-and-Pipeline">Selecting the Best Classifier and Pipeline<a class="anchor-link" href="#Selecting-the-Best-Classifier-and-Pipeline">&#182;</a></h2><p>The following figure compares all combinations the every best classifier with a feature selection function.</p>
+<h2 id="Selecting-the-Best-Classifier-and-Pipeline">Selecting the Best Classifier and Pipeline<a class="anchor-link" href="#Selecting-the-Best-Classifier-and-Pipeline">&#182;</a></h2><p>The following figure compares all combinations of every best classifier with a feature selection function.</p>
 
 </div>
 </div>
@@ -15831,7 +15831,7 @@ precision and recall.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>The best scoring classifier is the LogisticRegression with RFE.</li>
-<li>Number 2 is <code>NearestCentroid</code>, showing a robust performance with all feature selection functions. Furthermore, it becomes not confused</li>
+<li>Number 2 is <code>NearestCentroid</code>, showing a robust performance with all feature selection functions.</li>
 <li>The pre-selected feature combinations with the DataFrameSelector shows the "most solid" performance with all classifiers.</li>
 <li>RFE performs surprisingly bad with <code>DecisionTreeClassifier</code> and <code>RandomForest</code>. A possible explanation is given in this blog post: <a href="https://explained.ai/rf-importance/index.html">Beware Default Random Forest Importances</a></li>
 <li>However, the <code>DecisionTreeClassifier</code> and <code>RandomForest</code> constitute very simple classifiers with just a few features.</li>
